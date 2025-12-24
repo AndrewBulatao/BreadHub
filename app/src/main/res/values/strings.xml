@@ -35,6 +35,14 @@
         Tap on the dropdown to see what recipes you have saved for that sandwich type!
     </string>
 
+    <!-- For adding ingredients -->
+    <string name="protein_label">Protein: %1$s</string>
+    <string name="veggie_label">Vegetable: %1$s</string>
+    <string name="cheese_label">Cheese: %1$s</string>
+    <string name="sauce_label">Sauce: %1$s</string>
+
+
+
 
 
 

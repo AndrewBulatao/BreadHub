@@ -1,6 +1,7 @@
 package com.example.breadhub;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,12 @@ import java.util.List;
 
 public class CreateSandwichFragment extends Fragment {
 
+    // Arrays for ingredient types
+    private final List<String> proteins = new ArrayList<>();
+    private final List<String> veggies = new ArrayList<>();
+    private final List<String> cheeses = new ArrayList<>();
+    private final List<String> sauces = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,33 +51,83 @@ public class CreateSandwichFragment extends Fragment {
         LinearLayout proteinContainer = view.findViewById(R.id.proteinContainer);
         EditText proteinInput = proteinContainer.findViewById(R.id.proteinQues);
         Button addProteinBtn = view.findViewById(R.id.addProteinBtn);
+        TextView proteinView = view.findViewById(R.id.proteinView);
 
         LinearLayout veggieContainer = view.findViewById(R.id.veggieContainer);
         EditText veggieInput = veggieContainer.findViewById(R.id.veggieQues);
         Button addVeggieBtn = view.findViewById(R.id.addVeggieBtn);
+        TextView veggieView = view.findViewById(R.id.veggieView);
 
         LinearLayout cheeseContainer = view.findViewById(R.id.cheeseContainer);
         EditText cheeseInput = cheeseContainer.findViewById(R.id.cheeseQues);
         Button addCheeseBtn = view.findViewById(R.id.addCheeseBtn);
+        TextView cheeseView = view.findViewById(R.id.cheeseView);
 
         LinearLayout sauceContainer = view.findViewById(R.id.sauceContainer);
         EditText sauceInput = sauceContainer.findViewById(R.id.sauceQues);
         Button addSauceBtn = view.findViewById(R.id.addSauceBtn);
+        TextView sauceView = view.findViewById(R.id.sauceView);
 
         // Database
         AppDatabase db = AppDatabase.getInstance(requireContext());
 
         // Ensure default sandwich types exist
 
-        // TESTING
-        System.out.println("WE IN CREATE SANDWICH 2");
-
         // Ingredient "Add" buttons
-        addProteinBtn.setOnClickListener(createAddListener(proteinContainer, proteinInput));
-        addVeggieBtn.setOnClickListener(createAddListener(veggieContainer, veggieInput));
-        addCheeseBtn.setOnClickListener(createAddListener(cheeseContainer, cheeseInput));
-        addSauceBtn.setOnClickListener(createAddListener(sauceContainer, sauceInput));
+        addProteinBtn.setOnClickListener(v -> {
+            String text = proteinInput.getText().toString().trim();
+            if (!text.isEmpty()) {
+                // Append
+                proteins.add(text);
 
+                // Update the label using string resources
+                proteinView.setText(getString(R.string.protein_label, TextUtils.join(", ", proteins)));
+
+                // Clear input
+                proteinInput.setText("");
+            }
+        });
+
+
+        addVeggieBtn.setOnClickListener(v -> {
+            String text = veggieInput.getText().toString().trim();
+            if (!text.isEmpty()) {
+                // Append
+                veggies.add(text);
+
+                // Update the label using string resources
+                veggieView.setText(getString(R.string.veggie_label, TextUtils.join(", ", proteins)));
+
+                // Clear input
+                veggieInput.setText("");
+            }
+        });
+        addCheeseBtn.setOnClickListener(v -> {
+            String text = cheeseInput.getText().toString().trim();
+            if (!text.isEmpty()) {
+                // Append
+                cheeses.add(text);
+
+                // Update the label using string resources
+                cheeseView.setText(getString(R.string.cheese_label, TextUtils.join(", ", proteins)));
+
+                // Clear input
+                cheeseInput.setText("");
+            }
+        });
+        addSauceBtn.setOnClickListener(v -> {
+            String text = sauceInput.getText().toString().trim();
+            if (!text.isEmpty()) {
+                // Append
+                sauces.add(text);
+
+                // Update the label using string resources
+                sauceView.setText(getString(R.string.sauce_label, TextUtils.join(", ", proteins)));
+
+                // Clear input
+                sauceInput.setText("");
+            }
+        });
         // Add Recipe
         // TODO: Make a try/catch to make sure the user adds a name.
 
