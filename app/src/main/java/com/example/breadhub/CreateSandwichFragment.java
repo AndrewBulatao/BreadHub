@@ -22,6 +22,9 @@ import com.example.breadhub.database.SandwichType;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Check go back button and see if other buttons are responsive.
+// TODO: Also check if information on sandwiches gets uploaded into databases
+
 public class CreateSandwichFragment extends Fragment {
 
     @Nullable
@@ -34,7 +37,7 @@ public class CreateSandwichFragment extends Fragment {
 
         // Widgets
         Spinner spinner = view.findViewById(R.id.sandwichTypeSpinner);
-        Button addRecipeBtn = view.findViewById(R.id.addRecipeBtn);
+        Button addRecipeBtn = view.findViewById(R.id.searchBtn);
         Button goBackButton = view.findViewById(R.id.goBackBtn);
         EditText sandwichNameInput = view.findViewById(R.id.sandwichNameInput);
 
@@ -67,6 +70,8 @@ public class CreateSandwichFragment extends Fragment {
                     db.appDao().insertType(t);
                 }
                 types = db.appDao().getAllTypes();
+                System.out.println("WE IN CREATE SANDWICH 1");
+
             }
 
             List<String> typeNames = new ArrayList<>();
@@ -82,6 +87,8 @@ public class CreateSandwichFragment extends Fragment {
                 spinner.setAdapter(adapter);
             });
         }).start();
+        // TESTING
+        System.out.println("WE IN CREATE SANDWICH 2");
 
         // Ingredient "Add" buttons
         addProteinBtn.setOnClickListener(createAddListener(proteinContainer, proteinInput));
@@ -140,6 +147,7 @@ public class CreateSandwichFragment extends Fragment {
         // Go Back
         goBackButton.setOnClickListener(v -> {
             if (getActivity() != null) getActivity().getSupportFragmentManager().popBackStack();
+            System.out.println("WE GOIN BACK");
         });
 
         return view;

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+// TODO: Fix the pathing problem for 'viewrecipes'
 public class MenuFragment extends Fragment {
 
     @Nullable
@@ -29,7 +30,6 @@ public class MenuFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
-
         // Bread Search button
         Button breadSearchButt = view.findViewById(R.id.breadSearchButt);
         breadSearchButt.setOnClickListener(v -> {

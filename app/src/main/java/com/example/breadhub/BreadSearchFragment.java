@@ -16,7 +16,7 @@ public class BreadSearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_create_sandwhich, container, false);
+        View view = inflater.inflate(R.layout.fragment_bread_search, container, false);
 
         // Find spinner
         Spinner spinner = view.findViewById(R.id.sandwichTypeSpinner);

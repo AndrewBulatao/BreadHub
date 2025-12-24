@@ -18,7 +18,16 @@ public class Sandwich {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
+    /*
+     * typeId meanings:
+     * 1 = Sandwiches
+     * 2 = Subs / Hoagies
+     * 3 = Bánh mì
+     * 4 = Panini
+     * 5 = Burgers
+     */
     public int typeId;
+
     public String name;
     public String proteins;
     public String veggies;

@@ -7,6 +7,22 @@
     tools:context=".BreadSearchFragment">
 
 
+    <Button
+        android:id="@+id/searchBtn"
+        style="@style/UniversalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="148dp"
+        android:layout_marginEnd="148dp"
+        android:text="Search!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sandwichTypeSpinner"
+        app:layout_constraintVertical_bias="0.039" />
+
     <TextView
         android:id="@+id/menuTitle"
         android:layout_width="wrap_content"
@@ -64,6 +80,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sandwichTypeLabel" />
+
+    <Button
+        android:id="@+id/goBackBtn"
+        style="@style/UniversalButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="144dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="28dp"
+        android:text="Go back!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
