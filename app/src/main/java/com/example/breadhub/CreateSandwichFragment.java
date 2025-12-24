@@ -1,5 +1,6 @@
 package com.example.breadhub;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -132,11 +133,23 @@ public class CreateSandwichFragment extends Fragment {
         // TODO: Make a try/catch to make sure the user adds a name.
 
 
-        // Go Back
         goBackButton.setOnClickListener(v -> {
-            if (getActivity() != null) getActivity().getSupportFragmentManager().popBackStack();
-            System.out.println("WE GOIN BACK");
+            if (getActivity() == null) return;
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Confirm Exit")
+                    .setMessage("Are you sure you want to leave? All progress will be lost.")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, go back
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User canceled, do nothing
+                        dialog.dismiss();
+                    })
+                    .show();
         });
+
 
 
         return view;

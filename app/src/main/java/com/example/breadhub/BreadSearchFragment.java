@@ -1,10 +1,12 @@
 package com.example.breadhub;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,10 @@ public class BreadSearchFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_bread_search, container, false);
-
-        // Find spinner
+        // Find widgets
         Spinner spinner = view.findViewById(R.id.sandwichTypeSpinner);
+        Button goBackBtn = view.findViewById(R.id.goBackBtn);
+        Button searchBtn = view.findViewById(R.id.searchBtn);
 
         // Use string array from xml file
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -32,10 +35,24 @@ public class BreadSearchFragment extends Fragment {
 
         spinner.setAdapter(adapter);
 
+        goBackBtn.setOnClickListener(v -> {
+            if (getActivity() == null) return;
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Confirm Exit")
+                    .setMessage("Are you sure you want to leave? All progress will be lost.")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // User confirmed, go back
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User canceled, do nothing
+                        dialog.dismiss();
+                    })
+                    .show();
+        });
+
         return view;
-
-
-
     }
 
 }
