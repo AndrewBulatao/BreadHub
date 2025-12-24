@@ -96,7 +96,7 @@ public class CreateSandwichFragment extends Fragment {
                 veggies.add(text);
 
                 // Update the label using string resources
-                veggieView.setText(getString(R.string.veggie_label, TextUtils.join(", ", proteins)));
+                veggieView.setText(getString(R.string.veggie_label, TextUtils.join(", ", veggies)));
 
                 // Clear input
                 veggieInput.setText("");
@@ -109,7 +109,7 @@ public class CreateSandwichFragment extends Fragment {
                 cheeses.add(text);
 
                 // Update the label using string resources
-                cheeseView.setText(getString(R.string.cheese_label, TextUtils.join(", ", proteins)));
+                cheeseView.setText(getString(R.string.cheese_label, TextUtils.join(", ", cheeses)));
 
                 // Clear input
                 cheeseInput.setText("");
@@ -122,7 +122,7 @@ public class CreateSandwichFragment extends Fragment {
                 sauces.add(text);
 
                 // Update the label using string resources
-                sauceView.setText(getString(R.string.sauce_label, TextUtils.join(", ", proteins)));
+                sauceView.setText(getString(R.string.sauce_label, TextUtils.join(", ", sauces)));
 
                 // Clear input
                 sauceInput.setText("");
@@ -142,28 +142,4 @@ public class CreateSandwichFragment extends Fragment {
         return view;
     }
 
-    // Helper function to add ingredients to list
-    private View.OnClickListener createAddListener(LinearLayout container, EditText input) {
-        return v -> {
-            String text = input.getText().toString().trim();
-            if (!text.isEmpty()) {
-                TextView tv = new TextView(requireContext());
-                tv.setText(text);
-                container.addView(tv);
-                input.setText("");
-            }
-        };
-    }
-
-    // Extract ingredients from LinearLayout
-    private List<String> getIngredientsFromContainer(LinearLayout container) {
-        List<String> ingredients = new ArrayList<>();
-        for (int i = 0; i < container.getChildCount(); i++) {
-            View child = container.getChildAt(i);
-            if (child instanceof TextView) {
-                ingredients.add(((TextView) child).getText().toString());
-            }
-        }
-        return ingredients;
-    }
 }
