@@ -1,5 +1,6 @@
 package com.example.breadhub.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,10 +10,10 @@ public class SandwichType {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    // sandwiches,subs/hoagies, bánh mì, panini, and burgers
+    @NonNull
     public String name;
 
-    public SandwichType(String name) {
+    public SandwichType(@NonNull String name) {
         this.name = name;
     }
 }

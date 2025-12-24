@@ -1,5 +1,6 @@
 package com.example.breadhub.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -26,9 +27,12 @@ public class Sandwich {
      * 4 = Panini
      * 5 = Burgers
      */
+
+    @NonNull
+    public String name;
+
     public int typeId;
 
-    public String name;
     public String proteins;
     public String veggies;
     public String cheeses;

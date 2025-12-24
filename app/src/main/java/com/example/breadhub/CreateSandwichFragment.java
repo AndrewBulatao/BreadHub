@@ -61,32 +61,7 @@ public class CreateSandwichFragment extends Fragment {
         AppDatabase db = AppDatabase.getInstance(requireContext());
 
         // Ensure default sandwich types exist
-        new Thread(() -> {
-            List<SandwichType> types = db.appDao().getAllTypes();
-            if (types.isEmpty()) {
-                String[] defaultTypes = {"Sandwich", "Subs/Hoagies", "Bánh mì", "Panini", "Burger"};
-                for (String tName : defaultTypes) {
-                    SandwichType t = new SandwichType(tName);
-                    db.appDao().insertType(t);
-                }
-                types = db.appDao().getAllTypes();
-                System.out.println("WE IN CREATE SANDWICH 1");
 
-            }
-
-            List<String> typeNames = new ArrayList<>();
-            for (SandwichType t : types) typeNames.add(t.name);
-
-            requireActivity().runOnUiThread(() -> {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        requireContext(),
-                        android.R.layout.simple_spinner_item,
-                        typeNames
-                );
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-            });
-        }).start();
         // TESTING
         System.out.println("WE IN CREATE SANDWICH 2");
 
@@ -97,58 +72,15 @@ public class CreateSandwichFragment extends Fragment {
         addSauceBtn.setOnClickListener(createAddListener(sauceContainer, sauceInput));
 
         // Add Recipe
-        addRecipeBtn.setOnClickListener(v -> {
-            String name = sandwichNameInput.getText().toString().trim();
-            int typePosition = spinner.getSelectedItemPosition();
-            if (name.isEmpty()) return;
+        // TODO: Make a try/catch to make sure the user adds a name.
 
-            new Thread(() -> {
-                List<SandwichType> types = db.appDao().getAllTypes();
-                SandwichType selectedType = types.get(typePosition);
-
-                // Collect ingredients
-                List<String> proteins = getIngredientsFromContainer(proteinContainer);
-                List<String> veggies = getIngredientsFromContainer(veggieContainer);
-                List<String> cheeses = getIngredientsFromContainer(cheeseContainer);
-                List<String> sauces = getIngredientsFromContainer(sauceContainer);
-
-                // Insert sandwich into DB
-                Sandwich sandwich = new Sandwich(
-                        selectedType.id,
-                        name,
-                        String.join(", ", proteins),
-                        String.join(", ", veggies),
-                        String.join(", ", cheeses),
-                        String.join(", ", sauces)
-                );
-                db.appDao().insertSandwich(sandwich);
-
-                // Print for testing
-                List<Sandwich> allSandwiches = db.appDao().getAllSandwiches();
-                for (Sandwich s : allSandwiches) {
-                    System.out.println("Sandwich: " + s.name +
-                            " | Proteins: " + s.proteins +
-                            " | Veggies: " + s.veggies +
-                            " | Cheeses: " + s.cheeses +
-                            " | Sauces: " + s.sauces);
-                }
-
-                // Clear UI
-                requireActivity().runOnUiThread(() -> {
-                    sandwichNameInput.setText("");
-                    proteinContainer.removeAllViews();
-                    veggieContainer.removeAllViews();
-                    cheeseContainer.removeAllViews();
-                    sauceContainer.removeAllViews();
-                });
-            }).start();
-        });
 
         // Go Back
         goBackButton.setOnClickListener(v -> {
             if (getActivity() != null) getActivity().getSupportFragmentManager().popBackStack();
             System.out.println("WE GOIN BACK");
         });
+
 
         return view;
     }
