@@ -22,7 +22,7 @@ public class BreadSearchFragment extends Fragment {
         // Find widgets
         Spinner spinner = view.findViewById(R.id.sandwichTypeSpinner);
         Button goBackBtn = view.findViewById(R.id.goBackBtn);
-        Button searchBtn = view.findViewById(R.id.searchBtn);
+        Button searchBtn = view.findViewById(R.id.addRecipeBtn);
 
         // Use string array from xml file
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(

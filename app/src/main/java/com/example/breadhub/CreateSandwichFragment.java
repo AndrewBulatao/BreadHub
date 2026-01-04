@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,9 +17,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.breadhub.database.AppDatabase;
-import com.example.breadhub.database.Sandwich;
-import com.example.breadhub.database.SandwichType;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class CreateSandwichFragment extends Fragment {
 
         // Widgets
         Spinner spinner = view.findViewById(R.id.sandwichTypeSpinner);
-        Button addRecipeBtn = view.findViewById(R.id.searchBtn);
+        Button addRecipeBtn = view.findViewById(R.id.addRecipeBtn);
         Button goBackButton = view.findViewById(R.id.goBackBtn);
         EditText sandwichNameInput = view.findViewById(R.id.sandwichNameInput);
 
@@ -131,7 +132,30 @@ public class CreateSandwichFragment extends Fragment {
         });
         // Add Recipe
         // TODO: Make a try/catch to make sure the user adds a name.
+        addRecipeBtn.setOnClickListener(v -> {
+            // First check if the user input a recipe name
+            String sandwichName = sandwichNameInput.getText().toString().trim();
 
+            // Check if recipe name exists
+            if (sandwichName.isEmpty()) {
+                // Have pop up for user to insert name
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Missing Recipe Name")
+                        .setMessage("Please provide the name of your recipe")
+                        .setPositiveButton("Ok", (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .show();
+            }else{
+                Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show();
+                // Clear input texts
+                sandwichNameInput.setText("");
+                proteinInput.setText("");
+                veggieInput.setText("");
+                cheeseInput.setText("");
+                sauceInput.setText("");
+            }
+        });
 
         goBackButton.setOnClickListener(v -> {
             if (getActivity() == null) return;
